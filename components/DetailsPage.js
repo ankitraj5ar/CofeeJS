@@ -1,4 +1,5 @@
 import { getProductById } from "../services/Manager.js";
+import { addToCart } from "../services/Order.js";
 
 export class DetailsPage extends HTMLElement {
   constructor() {
@@ -21,7 +22,7 @@ export class DetailsPage extends HTMLElement {
 
   async renderData() {
     if (this.dataset.id) {
-      this.product = await getProductById(this.dataset.productId);
+      this.product = await getProductById(this.dataset.id);
       this.root.querySelector("h2").textContent = this.product.name;
       this.root.querySelector("img").src = `/data/images/${this.product.image}`;
       this.root.querySelector(".description").textContent =
@@ -30,7 +31,8 @@ export class DetailsPage extends HTMLElement {
         ".price"
       ).textContent = `$ ${this.product.price.toFixed(2)} ea`;
       this.root.querySelector("button").addEventListener("click", () => {
-        // TODO addToCart(this.product.id);
+        // TODO
+        addToCart(this.product.id);
         app.router.go("/order");
       });
     } else {

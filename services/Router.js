@@ -13,7 +13,6 @@ const Router = {
     Router.go(location.pathname);
   },
   go: (route, addToHistory = true) => {
-    console.log("route", route);
     if (addToHistory) {
       history.pushState({ route }, "", route);
     }
@@ -27,7 +26,7 @@ const Router = {
         pageElement.textContent = "your order";
         break;
       default:
-        if (route.startsWith("/products-")) {
+        if (route.startsWith("/product-")) {
           pageElement = document.createElement("details-page");
           pageElement.textContent = "Details";
           const paramId = route.substring(route.lastIndexOf("-") + 1);
